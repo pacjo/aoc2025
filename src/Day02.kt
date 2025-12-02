@@ -57,6 +57,22 @@ fun main() {
         return sum
     }
 
+    fun part2Regex(input: List<String>): Long {
+        var sum = 0L
+
+        // a similar regex (but lacking a + symbol) can be used to solve part1,
+        // but it's a bit slower in my tests then the solution above.
+        val regex = """(.+)\1+""".toRegex()
+        forEachRange(input) { start, end ->
+            for (id in start..end) {
+                if (regex.matches(id.toString()))
+                    sum += id
+            }
+        }
+
+        return sum
+    }
+
     val testInput = readInput("Day02_test")
     check(part1(testInput) == 1227775554L)        // sum of all invalid IDs
     check(part2(testInput) == 4174379265L)        // sum of all invalid IDs (by new rules)
@@ -65,4 +81,5 @@ fun main() {
     val input = readInput("Day02")
     println("part1: ${part1(input)}")
     println("part2: ${part2(input)}")
+    println("part2 (regex): ${part2Regex(input)}")
 }
