@@ -2,6 +2,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readText
+import kotlin.time.measureTime
 
 /**
  * Reads lines from the given input txt file.
@@ -19,3 +20,8 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+
+fun printTime(block: () -> Unit) {
+    println("time: ${measureTime(block)}")
+}
